@@ -331,7 +331,15 @@ function setChapter(i) {
   pill.classList.remove('flip'); void pill.offsetWidth; pill.classList.add('flip', 'show'); clearTimeout(setChapter.t); setChapter.t = setTimeout(() => pill.classList.remove('show'), 2800);
 }
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.2 });
-document.querySelectorAll('.rise').forEach(el => io.observe(el));
+document.querySelectorAll('.rise, .sweep').forEach(el => io.observe(el));
+// Give every chapter heading the light wipe, so the motion is one idea
+// applied consistently rather than a different effect per section.
+document.querySelectorAll('.chead h2.big, .srhead h2, .story h2').forEach(el => {
+  if (el.classList.contains('sweep')) return;
+  el.dataset.sweep = el.textContent;   // the ::after draws this text, lit
+  el.classList.add('sweep');
+  io.observe(el);
+});
 
 const says = [...document.querySelectorAll('.say > div')];
 const bar = document.getElementById('barfill'), rtime = document.getElementById('rtime'), rwhat = document.getElementById('rwhat');

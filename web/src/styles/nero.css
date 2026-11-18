@@ -643,3 +643,31 @@ h2.big, h1.big { font-size: clamp(50px, 7.6vw, 124px); line-height: .98; }
   .bkform { padding: 22px; border-radius: 20px; } .bkform .two { grid-template-columns: minmax(0, 1fr); }
   .yournote { padding-block: 96px; }
 }
+
+/* Light wipe on headings. The same idea as the loader and as the room going
+   from day to night: light crosses the thing and reveals it. One motion
+   language, used in three places, instead of a different effect per section. */
+.sweep { position: relative; }
+.sweep::after {
+  content: attr(data-sweep);
+  position: absolute; inset: 0; pointer-events: none; color: transparent;
+  background-image: linear-gradient(100deg,
+    transparent calc(var(--sw, 0) * 1% - 26%),
+    rgba(226,207,154,.85) calc(var(--sw, 0) * 1%),
+    transparent calc(var(--sw, 0) * 1% + 26%));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+}
+.sweep.in::after { animation: sweepLight 1.5s cubic-bezier(.3,.7,.2,1) .15s both; }
+@keyframes sweepLight {
+  0%   { --sw: -20; opacity: 0 }
+  12%  { opacity: 1 }
+  88%  { opacity: 1 }
+  100% { --sw: 120; opacity: 0 }
+}
+@property --sw { syntax: '<number>'; initial-value: 0; inherits: false }
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep::after { display: none; }
+}
