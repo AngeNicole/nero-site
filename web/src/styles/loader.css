@@ -1,0 +1,54 @@
+#ldr { --p: 0; position: fixed; inset: 0; z-index: 9999; background: #2A2521;
+  display: grid; place-items: center; transition: opacity .7s ease, visibility .7s; }
+#ldr.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+#ldr[hidden] { display: none; }
+.ldr-in { display: grid; justify-items: center; gap: 38px; padding: 0 24px;
+  animation: ldrFloat 6s ease-in-out infinite; }
+@keyframes ldrFloat { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-7px) } }
+
+/* A lamp coming on. The ring fills as the page arrives, one bead of light runs
+   round it, and the pool underneath widens: the brand's own idea rather than a
+   progress bar with a serif face above it. */
+.ldr-lamp { position: relative; width: 96px; height: 96px; }
+.ldr-pool { position: absolute; left: 50%; top: 50%; width: 260px; height: 260px;
+  margin: -130px 0 0 -130px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(226,207,154,.30), rgba(226,207,154,0) 68%);
+  transform: scale(calc(.30 + var(--p) / 100 * .95));
+  opacity: calc(.22 + var(--p) / 150);
+  transition: transform .45s ease, opacity .45s ease; }
+.ldr-ring { position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from -90deg,
+    #E2CF9A 0 calc(var(--p) * 1%), rgba(242,237,227,.10) calc(var(--p) * 1%) 100%);
+  -webkit-mask: radial-gradient(circle, #0000 59%, #000 60%);
+  mask: radial-gradient(circle, #0000 59%, #000 60%); }
+.ldr-orb { position: absolute; inset: 0;
+  transform: rotate(calc(var(--p) * 3.6deg)); transition: transform .4s linear; }
+.ldr-orb i { position: absolute; left: 50%; top: -5px; width: 11px; height: 11px;
+  margin-left: -5.5px; border-radius: 50%; background: #F6F1E6;
+  box-shadow: 0 0 16px 6px rgba(226,207,154,.7), 0 0 44px 14px rgba(226,207,154,.26);
+  animation: ldrPulse 1.9s ease-in-out infinite; }
+@keyframes ldrPulse { 0%, 100% { opacity: .85; transform: scale(.92) } 50% { opacity: 1; transform: scale(1.12) } }
+
+.ldr-w { position: relative; margin: 0;
+  font-family: "Fraunces", "Didot", Georgia, serif; font-weight: 600;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0; letter-spacing: .08em;
+  font-size: clamp(38px, 8vw, 92px); line-height: 1; color: rgba(242,237,227,.12); }
+.ldr-w::after { content: attr(data-t); position: absolute; inset: 0; color: transparent;
+  background-image: linear-gradient(100deg,
+    transparent calc(var(--p) * 1% - 30%),
+    rgba(242,237,227,.55) calc(var(--p) * 1% - 12%),
+    #F6F1E6 calc(var(--p) * 1%),
+    rgba(242,237,227,.55) calc(var(--p) * 1% + 12%),
+    transparent calc(var(--p) * 1% + 30%));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ldr-in { animation: none; }
+  .ldr-orb { transition: none; }
+  .ldr-orb i { animation: none; }
+  .ldr-pool { transition: none; }
+  .ldr-w { color: #F2EDE3; }
+  .ldr-w::after { display: none; }
+  #ldr { transition: none; }
+}

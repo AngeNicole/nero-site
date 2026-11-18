@@ -1,0 +1,25 @@
+---
+---
+<div class="page" id="bookpage" data-lenis-prevent role="dialog" aria-modal="true" aria-label="Book a visit" hidden>
+  <div class="in bk">
+    <div class="bkl">
+      <p class="kicker">Book a visit</p><h1 class="big">Come and see it lit.</h1>
+      <p class="plain">The showroom in Kigali opens by appointment, from morning to evening. Tell us what you would like to see and when, and we set each lamp to its note before you arrive.</p>
+      <div class="bkimg"><img data-img="bk2" alt="A soft sculptural lounge chair in a dim workshop"><span>Reference photograph by Caroline Badran on Unsplash</span></div>
+      <dl class="bkfacts"><dt>Where</dt><dd>Kigali, Rwanda</dd><dt>When</dt><dd>By appointment, morning to evening</dd><dt>How long</dt><dd>About an hour, with the atelier</dd><dt>Cost</dt><dd>Free</dd></dl>
+    </div>
+    <form class="bkform" id="contact" novalidate>
+      <div class="bkstep"><h3><span>1</span>What would you like to see?</h3><p class="cap" style="margin:0 0 4px">Choose as many as you like.</p>
+        <div class="chips multi" id="bkpieces"><button type="button" data-v="Eclisse" aria-pressed="true">Eclisse</button><button type="button" data-v="Volta" aria-pressed="false">Volta</button><button type="button" data-v="Ombra" aria-pressed="false">Ombra</button><button type="button" data-v="The atelier" aria-pressed="false">The atelier at work</button><button type="button" data-v="A project" aria-pressed="false">A project for a client</button></div></div>
+      <div class="bkstep"><h3><span>2</span>When?</h3>
+        <div class="seg" id="bktime" role="group" aria-label="Time of day"><button type="button" data-v="Morning" aria-pressed="false">Morning<small>daylight</small></button><button type="button" data-v="Afternoon" aria-pressed="false">Afternoon<small>low sun</small></button><button type="button" data-v="Evening" aria-pressed="true">Evening<small>every lamp on</small></button></div>
+        <div class="two"><label for="cdate">Preferred day<input id="cdate" name="date" type="date"></label><label for="cppl">How many people<select id="cppl" name="people"><option>Just me</option><option>Two</option><option>Three or four</option><option>Five or more</option></select></label></div></div>
+      <div class="bkstep"><h3><span>3</span>About you</h3>
+        <div class="two"><label for="cname">Name<input id="cname" name="name" autocomplete="name"></label><label for="cmail">Email<input id="cmail" name="email" type="email" autocomplete="email"></label></div>
+        <label for="cphone">Phone, if you prefer a call<input id="cphone" name="phone" type="tel" autocomplete="tel"></label>
+        <label for="cmsg">Anything we should know<textarea id="cmsg" name="message" placeholder="The room you are furnishing, a colour you have in mind, or a question"></textarea></label></div>
+      <div class="bksend"><button class="pill lit bigp" type="submit">Request my visit</button><p class="ok" id="cok" role="status"></p></div>
+    </form>
+  </div>
+<div class="pagefoot"></div>
+</div>

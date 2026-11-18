@@ -1,0 +1,105 @@
+---
+/**
+ * NERO, one page. It was a 164 KB template fed through a hand-written Python
+ * script that string-replaced __TOKEN__ placeholders with base64. Now: a
+ * stylesheet, three scripts, and photographs served as files.
+ *
+ * The scripts are shipped verbatim with is:inline. They hold the scroll
+ * machinery and the WebGL that relights the room from day to night, and that
+ * is not something to quietly refactor during a move.
+ */
+import '../styles/loader.css';
+import '../styles/nero.css';
+import ImagePool from '../components/ImagePool.astro';
+import Grain from '../components/Grain.astro';
+import Glow from '../components/Glow.astro';
+import Dot from '../components/Dot.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import ChapterRail from '../components/ChapterRail.astro';
+import Cpill from '../components/Cpill.astro';
+import Room from '../components/Room.astro';
+import LightingNote from '../components/LightingNote.astro';
+import Collection from '../components/Collection.astro';
+import Making from '../components/Making.astro';
+import BookBand1 from '../components/BookBand1.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Aboutpage from '../components/Aboutpage.astro';
+import Piecespage from '../components/Piecespage.astro';
+import Showpage from '../components/Showpage.astro';
+import Bookpage from '../components/Bookpage.astro';
+import Panel from '../components/Panel.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>NERO House</title>
+    <meta
+      name="description"
+      content="NERO, a concept furniture house in Kigali. Every piece, in its best light."
+    />
+    <script is:inline src="/js/theme.js"></script>
+  </head>
+  <body>
+<!-- Loader first, and on its own. Everything below this is half a megabyte of
+     inlined Fraunces before a single photograph, so a loader placed after it
+     cannot paint until the waiting is nearly over. Colours and the face are
+     written out rather than taken from :root, because :root is defined in the
+     stylesheet that follows. -->
+<div id="ldr" role="status" aria-live="polite" aria-label="Loading NERO">
+  <div class="ldr-in">
+    <div class="ldr-lamp">
+      <span class="ldr-pool"></span>
+      <span class="ldr-ring"></span>
+      <span class="ldr-orb"><i></i></span>
+    </div>
+    <p class="ldr-w" data-t="NERO">NERO</p>
+  </div>
+</div>
+    <ImagePool />
+    <Grain />
+    <Glow />
+    <Dot />
+    <SiteHeader />
+    <ChapterRail />
+    <Cpill />
+    <main id="main">
+      <Room />
+      <LightingNote />
+      <Collection />
+      <Making />
+    </main>
+    <BookBand1 />
+    <SiteFooter />
+    <Aboutpage />
+    <Piecespage />
+    <Showpage />
+    <Bookpage />
+    <Panel />
+
+    {/*
+      Three.js and Lenis come from a CDN, now with Subresource Integrity. The
+      browser hashes what it receives and refuses to run it if the bytes do not
+      match, so a compromised CDN cannot quietly swap in different code. The
+      versions are pinned to what the shaders were written against: three r128
+      and lenis 1.1.13.
+    */}
+    <script
+      is:inline
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+      integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script
+      is:inline
+      src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"
+      integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+
+    <script is:inline src="/js/loader.js"></script>
+    <script is:inline src="/js/site.js"></script>
+  </body>
+</html>
